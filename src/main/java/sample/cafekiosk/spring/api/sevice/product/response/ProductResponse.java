@@ -14,10 +14,10 @@ public class ProductResponse {
     private ProductType type;
     private ProductSellingStatus sellingStatus;
     private String name;
-    private String price;
+    private int price;
 
     @Builder
-    private ProductResponse(Long id, String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, String price) {
+    private ProductResponse(Long id, String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
         this.id = id;
         this.productNumber = productNumber;
         this.type = type;
