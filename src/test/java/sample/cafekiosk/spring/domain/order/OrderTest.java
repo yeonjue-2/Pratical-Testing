@@ -15,7 +15,7 @@ class OrderTest {
 
     @Test
     @DisplayName("주문 생성 시 상품 리스트에서 주문의 총 금액을 계산한다.")
-    void calculateTotalPrice() throws Exception {
+    void calculateTotalPrice() {
         // given
         List<Product> products = List.of(
                 createProduct("001", 1000),
@@ -31,7 +31,7 @@ class OrderTest {
 
     @Test
     @DisplayName("주문 생성 시 주문 상태는 INIT 이다")
-    void init() throws Exception {
+    void init() {
         // given
         List<Product> products = List.of(
                 createProduct("001", 1000),
@@ -46,7 +46,7 @@ class OrderTest {
 
     @Test
     @DisplayName("주문 생성 시 주문 등록 시간을 기록한다.")
-    void registeredDateTime() throws Exception {
+    void registeredDateTime() {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
         List<Product> products = List.of(
