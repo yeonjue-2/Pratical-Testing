@@ -3,14 +3,13 @@ package sample.cafekiosk.spring.api.sevice.product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sample.cafekiosk.spring.api.controller.product.dto.ProductCreateRequest;
+import sample.cafekiosk.spring.api.sevice.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.spring.api.sevice.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductRepository;
 import sample.cafekiosk.spring.domain.product.ProductSellingStatus;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class ProductService {
 
     // 동시성 이슈
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = nextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
