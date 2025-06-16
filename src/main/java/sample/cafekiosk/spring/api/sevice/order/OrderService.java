@@ -1,8 +1,8 @@
 package sample.cafekiosk.spring.api.sevice.order;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sample.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.api.sevice.order.response.OrderResponse;
 import sample.cafekiosk.spring.domain.order.Order;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class OrderService {
@@ -28,6 +28,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final StockRepository stockRepository;
 
+    @Transactional
     public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
@@ -59,7 +60,7 @@ public class OrderService {
         }
     }
 
-    private static List<String> extractStockProductNumbers(List<Product> products) {
+    private List<String> extractStockProductNumbers(List<Product> products) {
         return products.stream()
                 .filter(pr -> ProductType.containsStockType(pr.getType()))
                 .map(Product::getProductNumber)
@@ -72,7 +73,7 @@ public class OrderService {
                 .collect(Collectors.toMap(Stock::getProductNumber, stock -> stock));
     }
 
-    private static Map<String, Long> createCountingMapBy(List<String> stockProductNumbers) {
+    private Map<String, Long> createCountingMapBy(List<String> stockProductNumbers) {
         return stockProductNumbers.stream()
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
     }
