@@ -62,7 +62,6 @@ class OrderServiceTest {
         Product product1 = createProduct(HANDMADE, "001", 1000);
         Product product2 = createProduct(HANDMADE, "002", 3000);
         Product product3 = createProduct(HANDMADE, "003", 5000);
-
         productRepository.saveAll(List.of(product1, product2, product3));
 
         OrderCreateRequest request = OrderCreateRequest.builder()
@@ -172,8 +171,9 @@ class OrderServiceTest {
         Product product3 = createProduct(HANDMADE, "003", 5000);
         productRepository.saveAll(List.of(product1, product2, product3));
 
-        Stock stock1 = Stock.create("001", 0);
-        Stock stock2 = Stock.create("002", 1);
+        Stock stock1 = Stock.create("001", 1);
+        Stock stock2 = Stock.create("002", 2);
+        stock1.deductQuantity(1);
         stockRepository.saveAll(List.of(stock1, stock2));
 
         OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
