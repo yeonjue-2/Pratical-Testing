@@ -4,11 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import sample.cafekiosk.spring.IntegrationTestSupport;
-import sample.cafekiosk.spring.api.sevice.mail.MailService;
-import sample.cafekiosk.spring.client.mail.MailSendClient;
 import sample.cafekiosk.spring.domain.history.mail.MailSendHistory;
 import sample.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
 import sample.cafekiosk.spring.domain.order.Order;
@@ -56,7 +52,7 @@ class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Test
     @DisplayName("결제완료 주문들을 조회하며 매출 통계 메일을 전송한다.")
-    void sendOrderStatisticsMail() throws Exception {
+    void sendOrderStatisticsMail() {
         // given
         LocalDateTime now = LocalDateTime.of(2025, 6, 16, 0, 0);
 

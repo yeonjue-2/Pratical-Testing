@@ -30,7 +30,7 @@ class MailServiceTest {
 
     @Test
     @DisplayName("메일 전송 test_순수 mokito")
-    void sendMail() throws Exception {
+    void sendMail() {
         doReturn(true)
                 .when(mailSendClient)
                 .sendMail(anyString(), anyString(), anyString(), anyString());
